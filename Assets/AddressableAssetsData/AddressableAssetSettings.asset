@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
+  m_Name: AddressableAssetSettings
+  m_EditorClassIdentifier: 
+  m_DefaultGroup: 36aa4897b98d22844a7e48d13dc394d3
+  m_currentHash:
+    serializedVersion: 2
+    Hash: 402d826b02679688b9ffc72de24fd9c0
+  m_OptimizeCatalogSize: 0
+  m_BuildRemoteCatalog: 0
+  m_BundleLocalCatalog: 0
+  m_CatalogRequestsTimeout: 0
+  m_DisableCatalogUpdateOnStart: 0
+  m_IgnoreUnsupportedFilesInBuild: 0
+  m_UniqueBundleIds: 0
+  m_NonRecursiveBuilding: 1
+  m_CCDEnabled: 0
+  m_maxConcurrentWebRequests: 3
+  m_ContiguousBundles: 1
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_ShaderBundleNaming: 0
+  m_ShaderBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_CheckForContentUpdateRestrictionsOption: 0
+  m_MonoScriptBundleCustomNaming: 
+  m_RemoteCatalogBuildPath:
+    m_Id: 
+  m_RemoteCatalogLoadPath:
+    m_Id: 
+  m_ContentStateBuildPathProfileVariableName: 
+  m_CustomContentStateBuildPath: 
+  m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 0
+  m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
+  m_GroupAssets:
+  - {fileID: 11400000, guid: a9f31c3afb1168a46b36e091ca36411b, type: 2}
+  - {fileID: 11400000, guid: b7954aff39973ef4299211cfdc6d91af, type: 2}
+  - {fileID: 11400000, guid: e145e857f2c0e274bbf8ad624278d0a6, type: 2}
+  m_BuildSettings:
+    m_CompileScriptsInVirtualMode: 0
+    m_CleanupStreamingAssetsAfterBuilds: 1
+    m_LogResourceManagerExceptions: 1
+    m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
+  m_ProfileSettings:
+    m_Profiles:
+    - m_InheritedParent: 
+      m_Id: c63f04218004b9f42aa76f5c9b3dc560
+      m_ProfileName: Default
+      m_Values:
+      - m_Id: c559b76395636ce438800dc58fffdd9b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e905089826e0b014a95a7fba44cc82c3
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 92d6549536a4784489ca2b3b2a6c28e0
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 8723b69bd2fba1f429001080aa865ab9
+        m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: 32dc731da2e8c5e4fa0e45dc0a7b3e0b
+        m_Value: 'http://[PrivateIpAddress]:[HostingServicePort]'
+    m_ProfileEntryNames:
+    - m_Id: c559b76395636ce438800dc58fffdd9b
+      m_Name: BuildTarget
+      m_InlineUsage: 0
+    - m_Id: e905089826e0b014a95a7fba44cc82c3
+      m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 92d6549536a4784489ca2b3b2a6c28e0
+      m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: 8723b69bd2fba1f429001080aa865ab9
+      m_Name: Remote.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 32dc731da2e8c5e4fa0e45dc0a7b3e0b
+      m_Name: Remote.LoadPath
+      m_InlineUsage: 0
+    m_ProfileVersion: 1
+  m_LabelTable:
+    m_LabelNames: []
+  m_SchemaTemplates: []
+  m_GroupTemplateObjects:
+  - {fileID: 11400000, guid: d7176559f44aae0418ce157f642beb29, type: 2}
+  m_InitializationObjects: []
+  m_CertificateHandlerType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_ActivePlayerDataBuilderIndex: 3
+  m_DataBuilders:
+  - {fileID: 11400000, guid: 105f43fe670c5fc47a654d7bed77edf0, type: 2}
+  - {fileID: 11400000, guid: 912de38261c8946488cc76ca4c8659c3, type: 2}
+  - {fileID: 11400000, guid: 503acc72fb371bc4a99176275182847a, type: 2}
+  - {fileID: 11400000, guid: adbdbf0a63bfc304bb403a2c9906ec67, type: 2}
+  m_ActiveProfileId: c63f04218004b9f42aa76f5c9b3dc560
+  m_HostingServicesManager:
+    m_HostingServiceInfos: []
+    m_Settings: {fileID: 11400000}
+    m_NextInstanceId: 0
+    m_RegisteredServiceTypeRefs: []
+    m_PingTimeoutInMilliseconds: 5000
