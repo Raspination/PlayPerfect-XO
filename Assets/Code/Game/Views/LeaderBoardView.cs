@@ -41,10 +41,19 @@ namespace PlayPerfect.XO
             var scoreData = scoringSystem.ScoreData;
 
             if (_totalScoreTxt != null)
+            {
                 _totalScoreTxt.text = $"Total Score: {scoreData.totalScore}";
+            }
+
+            if (_latestScoreTxt != null)
+            {
+                _latestScoreTxt.text = $"Latest Score: {lastDisplayedScore}";
+            }
 
             if (_gamesPlayed != null)
+            {
                 _gamesPlayed.text = $"Games: {scoreData.gamesPlayed}";
+            }
 
             if (_winrate != null)
             {

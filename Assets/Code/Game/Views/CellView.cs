@@ -22,10 +22,11 @@ namespace PlayPerfect.XO
             _assetLoader = assetLoader;
         }
 
-        public void Initialize(int row, int col)
+        public void Initialize(int row, int col, Enums.CellState cellState = Enums.CellState.Empty)
         {
             _row = row;
             _collumn = col;
+            UpdateCellVisual(cellState);
         }
         
         private void Start()
@@ -33,9 +34,6 @@ namespace PlayPerfect.XO
             _cellButton.onClick.AddListener(OnCellClicked);
             _gameManager.OnCellChanged += OnCellChanged;
             _gameManager.OnGameStateChanged += OnGameStateChanged;
-
-            _image.sprite = null;
-            _image.color = Color.clear;
         }
 
         private void OnCellClicked()
@@ -56,12 +54,18 @@ namespace PlayPerfect.XO
             _cellButton.interactable = gameData._gameState == Enums.GameState.Playing &&
                                        gameData.IsPlayerTurn &&
                                        gameData._board[_row, _collumn] == Enums.CellState.Empty;
+            
+            var cellState = gameData._board[_row, _collumn];
+            UpdateCellVisual(cellState);
         }
 
         private void UpdateCellVisual(Enums.CellState state)
         {
-            if (!_assetLoader.IsLoaded) return;
-
+            if (_assetLoader == null || !_assetLoader.IsLoaded) 
+            {
+                return;
+            }
+            
             switch (state)
             {
                 case Enums.CellState.X:
@@ -77,8 +81,8 @@ namespace PlayPerfect.XO
                     _image.color = Color.clear;
                     break;
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_image.rectTransform);
         }
-        
         
         private void OnDestroy()
         {

@@ -25,5 +25,6 @@ namespace PlayPerfect.XO.Data
         public const float FAST_TIME_THRESHOLD = 10f;
         public const float SLOW_TIME_THRESHOLD = 20f;
         public const string SCORE_DATA_KEY = "XO_ScoreData";
+        public const string AUTO_SAVE_GAME_KEY = "XO_AutoSaveGame";
     }
 }

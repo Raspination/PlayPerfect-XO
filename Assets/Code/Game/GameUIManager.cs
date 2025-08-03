@@ -49,7 +49,7 @@ namespace PlayPerfect.XO
         {
             try
             {
-                await _gameManager.LoadNewGameAsync();
+                await _gameManager.LoadSavedGameAsync();
                 InitializeUI();
             }
             catch (Exception e)
@@ -155,7 +155,7 @@ namespace PlayPerfect.XO
                     rectTransform.sizeDelta = cellSize;
                 }
 
-                cell.Initialize(row, col);
+                cell.Initialize(row, col, _gameManager.GameData._board[row,col]);
                 _activeCells.Add(cell);
             }
         }

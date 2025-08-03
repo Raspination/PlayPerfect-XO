@@ -20,6 +20,7 @@ namespace PlayPerfect.XO
         private AssetLoader _assetLoader;
         private ComputerPlayer _secondPlayer;
         private IScoringSystem _scoringSystem;
+        private GameSaveManager _gameSaveManager;
         private float _gameStartTime;
         private float _turnStartTime;
         private float _totalTurnTime;
@@ -29,17 +30,16 @@ namespace PlayPerfect.XO
 
         #region Public Properties
         public GameData GameData => _gameData;
-        public IScoringSystem ScoringSystem => _scoringSystem;
         public bool IsGameInProgress => _gameData != null && _gameData._gameState == Enums.GameState.Playing;
         #endregion
         
-        
         [Inject]
-        public void Construct(AssetLoader assetLoader, IScoringSystem scoringSystem)
+        public void Construct(AssetLoader assetLoader, IScoringSystem scoringSystem, GameSaveManager gameSaveManager)
         {
             _assetLoader = assetLoader;
             _secondPlayer = new ComputerPlayer();
             _scoringSystem = scoringSystem;
+            _gameSaveManager = gameSaveManager;
         }
 
         public void Initialize()
@@ -133,6 +133,8 @@ namespace PlayPerfect.XO
                 _scoringSystem.CompleteGame(_gameData._gameState);
                 OnScoreCalculated?.Invoke(gameScore, _gameData._gameState);
                 OnGameOver?.Invoke();
+                
+                _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, (GameData)null);
             }
             else if (!_gameData.IsPlayerTurn)
             {
@@ -143,6 +145,11 @@ namespace PlayPerfect.XO
             
             _isPlayerTurn = false;
             playerTurnCompletionSource?.TrySetResult();
+
+            if (IsGameInProgress)
+            {
+                _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, _gameData);
+            }
         }
 
         private async UniTask HandleComputerTurn()
@@ -164,10 +171,14 @@ namespace PlayPerfect.XO
                     _scoringSystem.CompleteGame(_gameData._gameState);
                     OnScoreCalculated?.Invoke(gameScore, _gameData._gameState);
                     OnGameOver?.Invoke();
+                    
+                    _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, (GameData)null);
                 }
                 else
                 {
                     _turnStartTime = Time.time;
+                    
+                    _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, _gameData);
                 }
             }
         }
@@ -176,5 +187,67 @@ namespace PlayPerfect.XO
         {
             LoadNewGameAsync().Forget();
         }
+
+        #region Save/Load Methods
+
+        public async UniTask LoadSavedGameAsync()
+        {
+            try
+            {
+                await UniTask.WaitUntil(() => _assetLoader.IsLoaded);
+                
+                var savedData = _gameSaveManager.LoadGame<GameData>(Consts.AUTO_SAVE_GAME_KEY);
+                if (savedData != null && savedData._gameState == Enums.GameState.Playing)
+                {
+                    _gameData = savedData;
+                    _totalTurnTime = 0f;
+                    _gameStartTime = Time.time;
+                    _turnStartTime = Time.time;
+                    
+                    _scoringSystem.StartNewGame();
+                    
+                    OnGameStateChanged?.Invoke(_gameData);
+                    
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (_gameData._board[i, j] != Enums.CellState.Empty)
+                            {
+                                OnCellChanged?.Invoke(i, j, _gameData._board[i, j]);
+                            }
+                        }
+                    }
+                    
+                    if (!_gameData.IsPlayerTurn)
+                    {
+                        await HandleComputerTurn();
+                    }
+                }
+                else
+                {
+                    await LoadNewGameAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                await LoadNewGameAsync();
+            }
+        }
+
+        public void ClearSavedGame()
+        {
+            try
+            {
+                _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, (GameData)null);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
+        }
+
+        #endregion
     }
 }
