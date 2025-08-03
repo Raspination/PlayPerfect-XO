@@ -12,7 +12,8 @@ namespace PlayPerfect.XO
         public int gamesTied;
         public float bestTime;
         public float averageTime;
-        
+        public int currentGameScore;
+
         public ScoreData()
         {
             Reset();
@@ -27,11 +28,13 @@ namespace PlayPerfect.XO
             gamesTied = 0;
             bestTime = float.MaxValue;
             averageTime = 0f;
+            currentGameScore = 0;
         }
         
         public void AddGameResult(int gameScore, float gameTime, Data.Enums.GameState result)
         {
             totalScore += gameScore;
+            currentGameScore = gameScore;
             gamesPlayed++;
             
             switch (result)

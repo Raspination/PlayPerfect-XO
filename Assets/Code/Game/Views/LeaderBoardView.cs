@@ -47,7 +47,7 @@ namespace PlayPerfect.XO
 
             if (_latestScoreTxt != null)
             {
-                _latestScoreTxt.text = $"Latest Score: {lastDisplayedScore}";
+                _latestScoreTxt.text = $"Latest Score: {scoreData.currentGameScore}";
             }
 
             if (_gamesPlayed != null)
