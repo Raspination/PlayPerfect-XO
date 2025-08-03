@@ -62,18 +62,5 @@ namespace PlayPerfect.XO
             cell.transform.SetParent(_cellsHolder);
             _availableCells.Enqueue(cell);
         }
-
-        public void ReturnAllCells()
-        {
-            while (_activeCells.Count > 0)
-            {
-                ReturnCell(_activeCells[0]);
-            }
-        }
-
-        public List<CellView> GetActiveCells()
-        {
-            return new List<CellView>(_activeCells);
-        }
     }
 }

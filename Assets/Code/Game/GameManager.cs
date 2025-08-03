@@ -97,7 +97,7 @@ namespace PlayPerfect.XO
         public int GetFinalScore()
         {
             if (IsGameInProgress) return 0;
-            
+
             var baseScore = _gameData._gameState switch
             {
                 Enums.GameState.PlayerWin => 1000,
@@ -105,7 +105,7 @@ namespace PlayPerfect.XO
                 Enums.GameState.Draw => 500,
                 _ => 0
             };
-            
+
             var timeBonus = Mathf.Max(0, 300f - _totalTurnTime) * 10f;
             return Mathf.RoundToInt(baseScore + timeBonus);
         }
@@ -135,8 +135,10 @@ namespace PlayPerfect.XO
                 OnGameOver?.Invoke();
                 
                 _gameSaveManager.SaveGame(Consts.AUTO_SAVE_GAME_KEY, (GameData)null);
+                return;
             }
-            else if (!_gameData.IsPlayerTurn)
+            
+            if (!_gameData.IsPlayerTurn)
             {
                 HandleComputerTurn().Forget();
             }
